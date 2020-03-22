@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class ds {
     public static void main(String[] args){
         System.out.println(args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
@@ -18,6 +20,20 @@ public class ds {
 
                 }
                 break;
+            case "permutation":
+                if(b.equalsIgnoreCase("encrypt")){
+                    permutation_encrypt(args[2],args[3]);
+                    break;
+                }
+                else if(b.equalsIgnoreCase("decrypt")){
+                    permutacion_decrypt(args[2],args[3]);
+                    break;
+                }
+                else {
+                    System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
+
+                }
+                break;
 
 
             default:System.out.println("Veprim i gabuar");
@@ -28,7 +44,7 @@ public class ds {
     int x=plaintext.length();
     String encriptuara="";
     int c=0;
-
+// logjika e perseritjes se qelesit nga GeeksForGeeks
         for (int i = 0; ; i++)
         {
             if (x == i)
@@ -37,7 +53,7 @@ public class ds {
                 break;
             key+=(key.charAt(i));
         }
-        System.out.println(key);
+
         for (int i=0;i<plaintext.length();i++){
             if (Character.isWhitespace(plaintext.charAt(i)))
             { ch=' ';
@@ -50,7 +66,7 @@ public class ds {
                 int b=key.charAt(i-c)-'a';
                 ch = (char)(plaintext.charAt(i)+b);
                     if(ch>'z'){
-                        ch = (char)(ch - 'z' + 'a' - 1);
+                        ch = (char)(ch - 'z' + 'a' - 1); //GeeksForGeeks ne logjiken e modulos
                     }
                 encriptuara+=ch;}
                     else if(plaintext.charAt(i)>='A' && plaintext.charAt(i)<='Z' && key.charAt(i-c)>='a' && key.charAt(i-c)<='z'){
@@ -89,7 +105,7 @@ public class ds {
                 break;
             key+=(key.charAt(i));
         }
-        System.out.println(key);
+
         for (int i=0;i<encrypted.length();i++){
             if (Character.isWhitespace(encrypted.charAt(i)))
             { ch=' ';
@@ -126,6 +142,49 @@ public class ds {
 
         }
         System.out.println(decriptuara);
+    }
+
+
+
+    public static void permutation_encrypt(String key,String plaintext){
+      int size=key.length();
+
+        String[] tokens = plaintext.split("(?<=\\G.{" + size + "})");
+        for(int i=0;i<tokens.length;i++)
+        {  if(tokens[i].length()<size)         // Per plotesim te karaktereve vendosim w
+            tokens[i]+='w';
+        for(int j=0;j<tokens[i].length();j++){
+            if (Character.isWhitespace(tokens[i].charAt(j)))         //Per space vendosim x
+            {	String str = tokens[i];
+                char ch = 'x';
+                int pos = j;
+
+                tokens[i] = str.substring(0, pos) + ch + str.substring(pos + 1);}
+        }
+        }
+for (int i=0;i<tokens.length;i++){
+    for(int j=0;j<tokens[i].length();j++){
+
+    }
+}
+
+System.out.print("PlainText:");
+        for(int i=0;i<tokens.length;i++)
+        {
+            System.out.print(tokens[i]);
+            System.out.print(" ");
+        }
+        System.out.println();
+        System.out.print("key:      ");
+        for(int i=0;i<tokens.length;i++)
+        {
+            System.out.print(key);
+            System.out.print(" ");
+        }
+    }
+
+    public static void permutacion_decrypt(String key,String cypher){
+
     }
     }
 
