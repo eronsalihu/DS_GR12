@@ -5,39 +5,53 @@ public class ds {
         System.out.println(args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
         String a=args[0];
         String b=args[1];
-        switch (a){
-            case "vigenere":
-                if (b.equalsIgnoreCase("encrypt"))
-                {vigenere_encrypt(args[2],args[3]);
-                break;
-                }
-                else if (b.equalsIgnoreCase("decrypt")){
-                    vigenere_decrypt(args[2],args[3]);
+        if((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation" )|| a.equalsIgnoreCase("playfair"))
+        && (b.equalsIgnoreCase("encrypt") || b.equalsIgnoreCase("decrypt"))){
+
+            switch (a){
+                case "vigenere":
+                    if (b.equalsIgnoreCase("encrypt"))
+                    {vigenere_encrypt(args[2],args[3]);
+                        break;
+                    }
+                    else if (b.equalsIgnoreCase("decrypt")){
+                        vigenere_decrypt(args[2],args[3]);
+                        break;
+                    }
+                    else {
+                        System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
+
+                    }
                     break;
-                }
-                else {
-                    System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
+                case "permutation":
+                    if(b.equalsIgnoreCase("encrypt")){
+                        permutation_encrypt(args[2],args[3]);
+                        break;
+                    }
+                    else if(b.equalsIgnoreCase("decrypt")){
+                        permutacion_decrypt(args[2],args[3]);
+                        break;
+                    }
+                    else {
+                        System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
 
-                }
-                break;
-            case "permutation":
-                if(b.equalsIgnoreCase("encrypt")){
-                    permutation_encrypt(args[2],args[3]);
+                    }
                     break;
-                }
-                else if(b.equalsIgnoreCase("decrypt")){
-                    permutacion_decrypt(args[2],args[3]);
-                    break;
-                }
-                else {
-                    System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
-
-                }
-                break;
 
 
-            default:System.out.println("Veprim i gabuar");
+                default:System.out.println("Veprim i gabuar");
+            }
         }
+
+        else {
+            System.out.println("Metoda e zgjedhur e cipher codit eshte gabim");
+            System.out.println("Argumenti i pare duhet  te jete vigenere ose permutation ose playfair");
+            System.out.println("Duhet zgjedhur ne argumentin e dyte enkriptimi ose dekriptimi");
+            System.out.println("Argumenti i trete nuk duhet te jete i zbrazet permban qelsin e enkriptimit");
+            System.out.print("Argumenti i 4 permban plaintextin ose ciphertextin te cilin deshironi ta deshifroni");
+            System.exit(0);
+        }
+
     }
     public static  void vigenere_encrypt(String key,String plaintext){
     char ch;
@@ -151,9 +165,10 @@ public class ds {
 
         String[] tokens = plaintext.split("(?<=\\G.{" + size + "})");
         for(int i=0;i<tokens.length;i++)
-        {  if(tokens[i].length()<size)         // Per plotesim te karaktereve vendosim w
-            tokens[i]+='w';
+        {
         for(int j=0;j<tokens[i].length();j++){
+            if(tokens[i].length()<size)         // Per plotesim te karaktereve vendosim w
+                tokens[i]+='w';
             if (Character.isWhitespace(tokens[i].charAt(j)))         //Per space vendosim x
             {	String str = tokens[i];
                 char ch = 'x';
