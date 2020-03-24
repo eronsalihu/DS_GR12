@@ -160,46 +160,4 @@ public class ds {
 
 
 
-    public static void permutation_encrypt(String key,String plaintext){
-      int size=key.length();
-
-        String[] tokens = plaintext.split("(?<=\\G.{" + size + "})");
-        for(int i=0;i<tokens.length;i++)
-        {
-        for(int j=0;j<tokens[i].length();j++){
-            if(tokens[i].length()<size)         // Per plotesim te karaktereve vendosim w
-                tokens[i]+='w';
-            if (Character.isWhitespace(tokens[i].charAt(j)))         //Per space vendosim x
-            {	String str = tokens[i];
-                char ch = 'x';
-                int pos = j;
-
-                tokens[i] = str.substring(0, pos) + ch + str.substring(pos + 1);}
-        }
-        }
-for (int i=0;i<tokens.length;i++){
-    for(int j=0;j<tokens[i].length();j++){
-
-    }
-}
-
-System.out.print("PlainText:");
-        for(int i=0;i<tokens.length;i++)
-        {
-            System.out.print(tokens[i]);
-            System.out.print(" ");
-        }
-        System.out.println();
-        System.out.print("key:      ");
-        for(int i=0;i<tokens.length;i++)
-        {
-            System.out.print(key);
-            System.out.print(" ");
-        }
-    }
-
-    public static void permutacion_decrypt(String key,String cypher){
-
-    }
-    }
-
+    
