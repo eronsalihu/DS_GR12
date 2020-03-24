@@ -159,10 +159,7 @@ public class ds {
     }
 
 
-	public static void main(String[] args) {
-		permutation_encrypt("3142", "siguria");
-		permutation_decrypt("3142", "gsuiarwi");
-	}
+	
 	public static void permutation_encrypt(String key, String plaintext) {
         //Variability
 		String cyphertext = "";
