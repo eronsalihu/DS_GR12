@@ -23,14 +23,10 @@ te medha si dhe per te vogla.
   Playfair cipher perdore matrice/tabele(5x5) e cila permban celesin.Per me gjeneru celesin duhet qe hapsirat ne tabele te mbushen me shkronja e celsit duke i injoruar shkonjat duplikate, pastaj mbushet me shkronjat tjera te mbetura ne baze te alfabetit. Table permban gjithsej 25 karaktere(shkronja) prandaj shkonja "J" dhe ajo "I" vendosen ne te njejtin vend ose 𝒓𝒆𝒑𝒍𝒂𝒄𝒆𝑨𝒍𝒍("𝑱","𝑰").
 Per ta enkriptu mesazhin e dhene do t'duhej qe mesazhi i dhene te ndahej ne nga dy letra(grupe). Enkriptimi i mesazhit kerkon qe teksti i mesazhit te jete me gjatesi cift keshtuqe, nese mesazhi eshte tek at'here i shtohet nje shkronje ("X") per ta kompletu diagramin e perbere me nga dy shkronja.
   Enkriptimi i mesazhit behet duke ndjekur disa rregulla qe qojne deri te ciphertext-i:
-  Nese shkonjat jane te njejta ("ALKOOL") at'her vendoset "X" mes atyre dy shkonjave.
-  --
-  Nese te dy shkronjat jane ne te njejten kolone, merret shkronja poshte seciles.
-  --
-  Nese te dy shkronjat jane ne te njejten rreshte, merret shkronja ne te djathte te seciles.
-  --
-  Nese asnjera prej rregullave t'mesiperme nuk vlene, at'here formohet nje drejtkëndesh me dy shkronja dhe merrnet shkronja ne kendin e kundert horizontal te drejtkendeshit.
-  --
-  Per me dekriptu eshte pothuajse e njejte me enkriptimin veq duke bere te kunderten.Dekriptimi duhet t'kete celesin e njejte dhe gjeneron tablen(5x5) e njejte dhe dekripton mezashin e dhene ne baze te atij celesi(*Per enkriptim dhe dekriptim duhet perdoret i njejti celes*)
+ - Nese shkonjat jane te njejta ("ALKOOL") at'her vendoset "X" mes atyre dy shkonjave.
+ - Nese te dy shkronjat jane ne te njejten kolone, merret shkronja poshte seciles.
+ - Nese te dy shkronjat jane ne te njejten rreshte, merret shkronja ne te djathte te seciles.
+ - Nese asnjera prej rregullave t'mesiperme nuk vlene, at'here formohet nje drejtkëndesh me dy shkronja dhe merrnet shkronja ne kendin e kundert horizontal te drejtkendeshit.
+ Per me dekriptu eshte pothuajse e njejte me enkriptimin veq duke bere te kunderten.Dekriptimi duhet t'kete celesin e njejte dhe gjeneron tablen(5x5) e njejte dhe dekripton mezashin e dhene ne baze te atij celesi(*Per enkriptim dhe dekriptim duhet perdoret i njejti celes*)
   Per dekriptim vlejn te gjitha kushtet qe jane permendur te enkriptimi.
   Source Code(https://github.com/northgc/playfair/blob/c9355592313a4454cc159b89d87f788018357663/playfair.java)
