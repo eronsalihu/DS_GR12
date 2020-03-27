@@ -30,3 +30,21 @@ Per ta enkriptu mesazhin e dhene do t'duhej qe mesazhi i dhene te ndahej ne nga 
  Per me dekriptu eshte pothuajse e njejte me enkriptimin veq duke bere te kunderten.Dekriptimi duhet t'kete celesin e njejte dhe gjeneron tablen(5x5) e njejte dhe dekripton mezashin e dhene ne baze te atij celesi(*Per enkriptim dhe dekriptim duhet perdoret i njejti celes*)
   Per dekriptim vlejn te gjitha kushtet qe jane permendur te enkriptimi.
   Source Code(https://github.com/northgc/playfair/blob/c9355592313a4454cc159b89d87f788018357663/playfair.java)
+
+
+--Komanda Permutacion--
+`Enkriptimi~
+Fillimisht krijojme metoden e permutacion_encrypt me dy parametra formal string key dhe sting plaintext .
+Fazat per enkriptimin qe duhet kaluar vijojne ne kete menyre:
+1.Fillimisht  mirret plaintexti  dhe e ndajme ate ne baze te key ne kete rast kemi key=4 domethene plaintextin e ndajme si array me nga 4 karaktere ne kete rast kemi perdorur funksionin split(source:Stakoverflow)
+2.Nese ne array-at e krijuar  gjatesia e plaintexti te ndare eshte me e vogel sesa  gjatesia e key atehere te gjitha hapsirat array-at qe kan gjatesi me te vogel mbushen me ndonje shkronje ne kete rast ne kemi perdorur shkronjen "w" deri ateher kur gjatesia e plantextit te jete e barabarte me  gjatesine e key-it dhe tasti "space" mbushet me karakterin "x".
+3.Pas mbushjes se hapsirave te zbrazeta merremi me enkriptimin e te dhenave .
+4.Pastaj secili karakter vendoset ne poziten e caktuar ne  baze te key te dhene duke e bere kalimin nga string ne integer ne menyre qe secili karakter te kaloj ne poziten e caktuar te paraqitur ne key-in e dhene .
+The se fundmi thirrim funksionin e enkriptimin peer te paraqitu ciphertextin e kerkuar.
+~Dekriptimi~
+Fillimisht krijojme metoden e permutacion_decrypt me dy parametra formal string key dhe sting encrypted(apo ciphertexti) .
+Fazat per dekriptimin e te dhenave jane:
+1.Ciphertexti e ndajme ne baze te key-it te dhene me te funksionit split().
+2.Pas ndarjet se ciphetextit  marrim ate dhe si secilin karakter e vendosim ne poziten e key-it te caktuar.
+3.Pastaj  shikojm nese ne ciphertext kemi ndonje "w" i cili eshte i vendosur vetem ne rast te hapsirave e zevendesojm me arrayin '\u0000'(source: stackoverflow) i cili paraqet empy character por nese "w"  nuk eshte vetem hapsire e cila eshte mbushur ne enkriptim (dmth eshte karakter ne plaintext) ateher mbetet e pazevendesuar.
+Perfundimisht thirrim funksionin i cili shfaq  plaintextin e kerkuar.
