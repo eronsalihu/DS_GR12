@@ -26,9 +26,7 @@ import org.xml.sax.SAXException;
 
 
 public class importKey {
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, InvalidPathException, FileNotFoundException {
-        import_Key("prova", "http://google.com");
-    }
+   
     public static void import_Key(String outFile, String path) throws ParserConfigurationException, IOException, SAXException, InvalidPathException {
         try {
             if (path.matches("^(http|https|)://.*$")) {
