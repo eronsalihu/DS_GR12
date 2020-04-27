@@ -1,5 +1,3 @@
-package test;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,47 +18,7 @@ import org.w3c.dom.Document;
 public class exportKey {
 
     public static void main(String[] args) throws IOException {
-
-        Scanner scanner=new Scanner(System.in);
-        String type=scanner.next();
-        String name=scanner.next();
-
-        File pubxml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",name+".pub.xml");
-        File xml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",name+".xml");
-
-
-        if ((type.equals("public")&&(pubxml.exists()))) {
-
-            String newname=scanner.next();
-            File xmlname=new File(newname);
-            xmlname.createNewFile();
-            Document pub = convertXMLFileToXMLDocument(pubxml);
-            pubxml.delete();
-            writeXmlDocumentToXmlFile(pub, xmlname);
-            // printExportKey(pub);
-            System.out.println("Celesi public u ruajt ne fajllin " + xmlname+".");
-
-        }
-        else{
-            System.out.println("Gabim: Celesi public "+name+" nuk ekziston.");
-        }
-
-
-
-        if ((type.equals("private"))&&(xml.exists())) {
-            String newname=scanner.next();
-            File xmlname=new File(newname);
-            xmlname.createNewFile();
-            Document pri = convertXMLFileToXMLDocument(xml);
-            xml.delete();
-            writeXmlDocumentToXmlFile(pri, xmlname);
-            // printExportKey(pri);
-            // System.out.println("Celesi privat u ruajt ne fajllin " + xmlname+".");
-        }
-        else {
-            System.out.println("Gabim: Celesi privat "+name+" nuk ekziton.");
-        }
-
+        
     }
     private static Document convertXMLFileToXMLDocument(File filePath){
 
@@ -69,10 +27,10 @@ public class exportKey {
         DocumentBuilder builder = null;
         try {
 
-                builder = factory.newDocumentBuilder();
-                Document xmlDocument = builder.parse(new File(String.valueOf(filePath)));
+            builder = factory.newDocumentBuilder();
+            Document xmlDocument = builder.parse(new File(String.valueOf(filePath)));
 
-                return xmlDocument;
+            return xmlDocument;
         }
         catch (Exception e)
         {
@@ -83,19 +41,19 @@ public class exportKey {
     private static void printExportKey(Document xmlDocument){
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer;
-         try {
-             transformer = tf.newTransformer();
+        try {
+            transformer = tf.newTransformer();
 
-             StringWriter writer = new StringWriter();
-             transformer.transform(new DOMSource(xmlDocument), new StreamResult(writer));
-             String xmlString = writer.getBuffer().toString();
-             System.out.println(xmlString);
+            StringWriter writer = new StringWriter();
+            transformer.transform(new DOMSource(xmlDocument), new StreamResult(writer));
+            String xmlString = writer.getBuffer().toString();
+            System.out.println(xmlString);
 
 
-         } catch (TransformerException e) {
-             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
 
-         }
+        }
     }
     private static void writeXmlDocumentToXmlFile(Document xmlDocument, File fileName){
         TransformerFactory tf = TransformerFactory.newInstance();
@@ -113,6 +71,82 @@ public class exportKey {
         }
         catch (Exception e)
         {
+            e.printStackTrace();
+        }
+    }
+    public static void export_public(String type,String fileName){
+        try{
+            File pubxml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",fileName+".pub.xml");
+
+            if (pubxml.exists()) {
+
+                Document pub = convertXMLFileToXMLDocument(pubxml);
+                printExportKey(pub);
+
+            }
+            else{
+                System.out.println("Gabim: Celesi public "+fileName+" nuk ekziston.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void export_public(String type,String fileName,String newFile){
+        try{
+            File pubxml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",fileName+".pub.xml");
+
+            if (pubxml.exists()) {
+
+                File pubxmlname = new File(newFile);
+                pubxmlname.createNewFile();
+                Document pri = convertXMLFileToXMLDocument(pubxml);
+                pubxml.delete();
+                writeXmlDocumentToXmlFile(pri, pubxmlname);
+
+
+
+
+            }
+            else{
+                System.out.println("Gabim: Celesi public "+fileName+" nuk ekziston.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void export_private(String type,String fileName) {
+        try {
+            File xml = new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys", fileName + ".xml");
+
+
+            if (xml.exists()) {
+
+                Document xmlfile = convertXMLFileToXMLDocument(xml);
+                printExportKey(xmlfile);
+
+            } else {
+                System.out.println("Gabim: Celesi privat " + fileName + " nuk ekziston.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void export_private(String type,String fileName,String newFile){
+        try {
+            File xml = new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys", fileName + ".xml");
+
+
+            if (xml.exists()) {
+
+                File xmlname = new File(newFile);
+                xmlname.createNewFile();
+                Document pri = convertXMLFileToXMLDocument(xml);
+                xml.delete();
+                writeXmlDocumentToXmlFile(pri, xmlname);
+
+                System.out.println("Celesi privat u ruajt ne fajllin " + xmlname+".");
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
