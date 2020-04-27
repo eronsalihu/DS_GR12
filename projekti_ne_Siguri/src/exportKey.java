@@ -1,5 +1,3 @@
-package test;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import org.w3c.dom.Document;
 public class exportKey {
 
     public static void main(String[] args) throws IOException {
-
+       
     }
     private static Document XMLFileToXMLDocument(File filePath){
 
@@ -76,28 +74,41 @@ public class exportKey {
             e.printStackTrace();
         }
     }
-    public static void export_public(String type,String fileName){
+    public static void export_public_private(String type,String fileName){
         try{
-            File pubxml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",fileName+".pub.xml");
+            File pubxml=new File("keys/",fileName+".pub.xml");
+            File xml = new File("keys/", fileName + ".xml");
 
-            if (pubxml.exists()) {
-
-                Document pub = XMLFileToXMLDocument(pubxml);
-                printExportKey(pub);
-
+            if (type.equals("public")) {
+                if(pubxml.exists()) {
+                    Document pub = XMLFileToXMLDocument(pubxml);
+                    printExportKey(pub);
+                } else{
+                    System.out.println("Gabim: Celesi public "+fileName+" nuk ekziston.");
+                }
             }
             else{
-                System.out.println("Gabim: Celesi public "+fileName+" nuk ekziston.");
+                if (xml.exists()) {
+
+                Document xmlfile = XMLFileToXMLDocument(xml);
+                printExportKey(xmlfile);
+
+            } else {
+                System.out.println("Gabim: Celesi privat " + fileName + " nuk ekziston.");
             }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public static void export_public(String type,String fileName,String newFile){
-        try{
-            File pubxml=new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys",fileName+".pub.xml");
 
-            if (pubxml.exists()) {
+    }
+    public static void export_public_private(String type,String fileName,String newFile){
+        try{
+            File pubxml=new File("keys/",fileName+".pub.xml");
+            File xml = new File("keys/", fileName + ".xml");
+
+            if ((pubxml.exists())&&type.equals("public")) {
 
                 File pubxmlname = new File(newFile);
                 pubxmlname.createNewFile();
@@ -107,34 +118,7 @@ public class exportKey {
                 System.out.println("Celesi public u ruajt ne fajllin " + pubxmlname+".");
 
             }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static void export_private(String type,String fileName) {
-        try {
-            File xml = new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys", fileName + ".xml");
-
-
-            if (xml.exists()) {
-
-                Document xmlfile = XMLFileToXMLDocument(xml);
-                printExportKey(xmlfile);
-
-            } else {
-                System.out.println("Gabim: Celesi privat " + fileName + " nuk ekziston.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static void export_private(String type,String fileName,String newFile){
-        try {
-            File xml = new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys", fileName + ".xml");
-
-
-            if (xml.exists()) {
+            if ((xml.exists())&&type.equals("private")) {
 
                 File xmlname = new File(newFile);
                 xmlname.createNewFile();
@@ -144,8 +128,11 @@ public class exportKey {
 
                 System.out.println("Celesi privat u ruajt ne fajllin " + xmlname+".");
             }
-        } catch (IOException e) {
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }
