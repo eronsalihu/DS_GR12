@@ -1,3 +1,5 @@
+package test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,9 +20,9 @@ import org.w3c.dom.Document;
 public class exportKey {
 
     public static void main(String[] args) throws IOException {
-        
+
     }
-    private static Document convertXMLFileToXMLDocument(File filePath){
+    private static Document XMLFileToXMLDocument(File filePath){
 
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -80,7 +82,7 @@ public class exportKey {
 
             if (pubxml.exists()) {
 
-                Document pub = convertXMLFileToXMLDocument(pubxml);
+                Document pub = XMLFileToXMLDocument(pubxml);
                 printExportKey(pub);
 
             }
@@ -99,17 +101,13 @@ public class exportKey {
 
                 File pubxmlname = new File(newFile);
                 pubxmlname.createNewFile();
-                Document pri = convertXMLFileToXMLDocument(pubxml);
+                Document pri = XMLFileToXMLDocument(pubxml);
                 pubxml.delete();
                 writeXmlDocumentToXmlFile(pri, pubxmlname);
-
-
-
+                System.out.println("Celesi public u ruajt ne fajllin " + pubxmlname+".");
 
             }
-            else{
-                System.out.println("Gabim: Celesi public "+fileName+" nuk ekziston.");
-            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,7 +119,7 @@ public class exportKey {
 
             if (xml.exists()) {
 
-                Document xmlfile = convertXMLFileToXMLDocument(xml);
+                Document xmlfile = XMLFileToXMLDocument(xml);
                 printExportKey(xmlfile);
 
             } else {
@@ -140,7 +138,7 @@ public class exportKey {
 
                 File xmlname = new File(newFile);
                 xmlname.createNewFile();
-                Document pri = convertXMLFileToXMLDocument(xml);
+                Document pri = XMLFileToXMLDocument(xml);
                 xml.delete();
                 writeXmlDocumentToXmlFile(pri, xmlname);
 
