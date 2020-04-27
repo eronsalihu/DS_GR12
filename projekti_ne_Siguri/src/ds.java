@@ -1,6 +1,14 @@
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
+
 public class ds {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, ParserConfigurationException, IOException, SAXException, InvalidPathException, FileNotFoundException {
         if (args.length == 0 ) {
             System.out.println("There were no commandline arguments passed!");
             System.exit(1);
@@ -34,7 +42,21 @@ public class ds {
                 System.exit(1);
             }
           else  deleteUser.delete(b);
-        } else if ((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation") ||
+        }else if(a.equalsIgnoreCase("import-key")){
+            if(args.length!=3){
+                System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
+            }
+          else if (b.matches("[A-Za-z0-9_]+")) {
+                    importKey.import_Key(b, args[2]);
+            }
+            else {
+                System.out.println("Argumenti i dyte mund te permbaje vetem shkronja numra ose underscore");
+                System.exit(1);
+            }
+        }
+
+        else if ((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation") ||
                 a.equalsIgnoreCase("playfair")) && (b.equalsIgnoreCase("encrypt") ||
                 b.equalsIgnoreCase("decrypt") || b.equalsIgnoreCase("encrypt_table") || b.equalsIgnoreCase("decrypt_table"))) {
 
