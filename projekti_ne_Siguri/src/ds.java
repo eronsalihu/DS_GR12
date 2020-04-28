@@ -55,6 +55,18 @@ public class ds {
                 System.exit(1);
             }
         }
+        else if(a.equalsIgnoreCase("export-key")){
+            if (args.length==3){
+                   exportKey.export_public_private(b,args[2]);
+            }
+            else if (args.length==4){
+                exportKey.export_public_private(b,args[2],args[3]);
+            }
+            else{
+                System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
+            }
+        }
 
         else if ((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation") ||
                 a.equalsIgnoreCase("playfair")) && (b.equalsIgnoreCase("encrypt") ||
