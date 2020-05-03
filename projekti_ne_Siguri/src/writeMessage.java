@@ -25,6 +25,7 @@ import java.util.Random;
 
 public class writeMessage {
 
+
     public static void write_Message(String outFile, String message) throws Exception {
         File file = new File("keys/" + outFile + ".pub.xml"); //Path to xml file
         if (file.exists()) {
@@ -51,7 +52,7 @@ public class writeMessage {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("DES");
 
             SecretKey celesi = secretKeyFactory.generateSecret(myKeySpec);
-
+            System.out.println(celesi);
 
             //Fitimi i qelesit publik nga XML dokumenti
             String moduliS = ((org.w3c.dom.Document) doc).getElementsByTagName("Modulus").item(0).getTextContent();
@@ -77,7 +78,7 @@ public class writeMessage {
             byte[] utf8 = message.getBytes("UTF8");
             byte[] enc = encryptedcipher.doFinal(utf8);
             enc = Base64.getEncoder().encode(enc);
-            String encryptedWord = Base64.getEncoder().encodeToString(enc);
+            String encryptedWord = new String(enc);
 
 
 
