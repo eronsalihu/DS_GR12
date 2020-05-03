@@ -52,7 +52,7 @@ public class writeMessage {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("DES");
 
             SecretKey celesi = secretKeyFactory.generateSecret(myKeySpec);
-            System.out.println(celesi);
+           
 
             //Fitimi i qelesit publik nga XML dokumenti
             String moduliS = ((org.w3c.dom.Document) doc).getElementsByTagName("Modulus").item(0).getTextContent();
@@ -148,10 +148,10 @@ public class writeMessage {
 
                 FileOutputStream outStream = new FileOutputStream(new File(String.valueOf(file)));
 
-                String str = emri + "." + ivi + "." + encryptedKey + "." + encryptedWord;
-                byte[] strToByte = str.getBytes();
+                String str=emri + "." + ivi + "." + encryptedKey + "." + encryptedWord;
+                byte[] strToByte=str.getBytes();
                 outStream.write(strToByte);
-                System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin " + file);
+                System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin "+file);
             }
         } catch (InvalidKeyException | ParserConfigurationException e) {
             e.printStackTrace();
