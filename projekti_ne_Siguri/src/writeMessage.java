@@ -2,10 +2,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
+import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
@@ -14,10 +11,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
@@ -84,12 +84,12 @@ public class writeMessage {
 
             System.out.println(emri + "." + ivi + "." + encryptedKey + "." + encryptedWord);
         } else {
-            System.out.println("Qelesi publik '" + outFile + "' nuk ekziston");
+            System.out.println("Gabim:Qelesi publik '" + outFile + "' nuk ekziston");
         }
     }
     public static void write_Message(String outFile, String message, String file) {
-try {
-            File pubfile = new File("C:\\Users\\Lenovo\\IdeaProjects\\exportKey\\src\\test\\keys\\" + outFile + ".pub.xml"); //Path to xml file
+        try {
+            File pubfile = new File("keys/" + outFile + ".pub.xml"); //Path to xml file
             if (pubfile.exists()) {
                 byte[] bytes = outFile.getBytes("UTF-8");
                 String emri = Base64.getEncoder().encodeToString(bytes);
@@ -143,22 +143,22 @@ try {
                 String encryptedWord = Base64.getEncoder().encodeToString(enc);
 
 
-              //  System.out.println(emri + "." + ivi + "." + encryptedKey + "." + encryptedWord);
+                //  System.out.println(emri + "." + ivi + "." + encryptedKey + "." + encryptedWord);
 
                 FileOutputStream outStream = new FileOutputStream(new File(String.valueOf(file)));
-                String str=emri + "." + ivi + "." + encryptedKey + "." + encryptedWord;
-                byte[] strToByte=str.getBytes();
+
+                String str = emri + "." + ivi + "." + encryptedKey + "." + encryptedWord;
+                byte[] strToByte = str.getBytes();
                 outStream.write(strToByte);
+                System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin " + file);
             }
-        } catch (InvalidKeyException e) {
+        } catch (InvalidKeyException | ParserConfigurationException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
