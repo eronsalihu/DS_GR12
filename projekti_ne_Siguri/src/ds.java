@@ -9,11 +9,10 @@ import java.nio.file.Paths;
 public class ds {
 
     public static void main(String[] args) throws Exception, ParserConfigurationException, IOException, SAXException, InvalidPathException, FileNotFoundException {
-        if (args.length == 0 ) {
+        if (args.length == 0) {
             System.out.println("There were no commandline arguments passed!");
             System.exit(1);
-        }
-        else if (args.length==1){
+        } else if (args.length == 1) {
             System.out.println("Komanda nuk eshte e kompletuar ose nuk eshte ne rregull");
             System.exit(1);
         }
@@ -22,53 +21,59 @@ public class ds {
         String a = args[0];
         String b = args[1];
         if (a.equalsIgnoreCase("create-user")) {
-            if(args.length!=2){
+            if (args.length != 2) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            }
-           else if (b.matches("[A-Za-z0-9_]+")) {
+            } else if (b.matches("[A-Za-z0-9_]+")) {
                 createUser.generate_key(b);
-            }
-
-            else {
+            } else {
                 System.out.println("Argumenti i dyte mund te permbaje vetem shkronja numra ose underscore");
                 System.exit(1);
             }
 
 
         } else if (a.equalsIgnoreCase("delete-user")) {
-            if (args.length!=2){
+            if (args.length != 2) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            }
-          else  deleteUser.delete(b);
-        }else if(a.equalsIgnoreCase("import-key")){
-            if(args.length!=3){
+            } else deleteUser.delete(b);
+        } else if (a.equalsIgnoreCase("import-key")) {
+            if (args.length != 3) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            }
-          else if (b.matches("[A-Za-z0-9_]+")) {
-                    importKey.import_Key(b, args[2]);
-            }
-            else {
+            } else if (b.matches("[A-Za-z0-9_]+")) {
+                importKey.import_Key(b, args[2]);
+            } else {
                 System.out.println("Argumenti i dyte mund te permbaje vetem shkronja numra ose underscore");
                 System.exit(1);
             }
-        }
-        else if(a.equalsIgnoreCase("export-key")){
-            if (args.length==3){
-                   exportKey.export_public_private(b,args[2]);
-            }
-            else if (args.length==4){
-                exportKey.export_public_private(b,args[2],args[3]);
-            }
-            else{
+        } else if (a.equalsIgnoreCase("export-key")) {
+            if (args.length == 3) {
+                exportKey.export_public_private(b, args[2]);
+            } else if (args.length == 4) {
+                exportKey.export_public_private(b, args[2], args[3]);
+            } else {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
             }
-        }
+        } else if (a.equalsIgnoreCase("write-message")) {
+            if (args.length == 3) {
+                writeMessage.write_Message(b, args[2]);
+            } else if (args.length == 4) {
+                writeMessage.write_Message(b, args[2], args[3]);
+            } else {
+                System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
+            }
+        } else if (a.equalsIgnoreCase("read-message")) {
+            if (args.length == 2) {
+                readMessage.decrypt(b);
+            } else {
+                System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
 
-        else if ((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation") ||
+            }
+        } else if ((a.equalsIgnoreCase("vigenere") || a.equalsIgnoreCase("permutation") ||
                 a.equalsIgnoreCase("playfair")) && (b.equalsIgnoreCase("encrypt") ||
                 b.equalsIgnoreCase("decrypt") || b.equalsIgnoreCase("encrypt_table") || b.equalsIgnoreCase("decrypt_table"))) {
 
