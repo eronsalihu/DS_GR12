@@ -48,3 +48,13 @@ Fazat per dekriptimin e te dhenave jane:
 2.Pas ndarjet se ciphetextit  marrim ate dhe si secilin karakter e vendosim ne poziten e key-it te caktuar.
 3.Pastaj  shikojm nese ne ciphertext kemi ndonje "w" i cili eshte i vendosur vetem ne rast te hapsirave e zevendesojm me arrayin '\u0000'(source: stackoverflow) i cili paraqet empy character por nese "w"  nuk eshte vetem hapsire e cila eshte mbushur ne enkriptim (dmth eshte karakter ne plaintext) ateher mbetet e pazevendesuar.
 Perfundimisht thirrim funksionin i cili shfaq  plaintextin e kerkuar.
+
+
+--Metoda Create User--
+Kryesisht ka te beje me gjenerimin e nje qelesi privat dhe publik RSA dhe ruajten e tyre ne XML files me extension
+te qelesit privat .xml kurse tek qelsi publik ekstensionit xml i shtohet nje oub .pu.xml...E vetmja veshtiresi qe hasa
+ne kete projekt ishte shkruajtja e nje xml file nga modeli DOM.Kompajllimi ne cmd eshte i thjesht pra se pari futemi 
+ne pathin perkates dhe bejme debug javac createUser.java
+Pastaj e bejme run me dhenien e argumenteve perkatese java ds create-user dhe emrin se si deshirojm ta ruajme e cila pranon
+vetem shkronja te alfabetit anglez numra dhe "_".
+Feedbacks nga geeksforgeeks dhe stackoverflow
