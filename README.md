@@ -65,4 +65,11 @@ Kompajllimi me deleteUser.java kurse run me ane te argumenteve java ds delete-us
 Feedbacks w3schools.
 
 
+--ImportKey--
+Shikon per nje qeles me  ne shtegun e dhene dhe fajllin e percaktuar dhe e ruan ate ne filen me emrin e dhene ne 
+argumentin e dyte ne cmd.Nga permbajtja mbrenda filev sipas nodes apo elementeve e din se ai file a eshte privat apo 
+publik dhe ku duhet ruajtur.Gjithashtu nese eshte http https merr trupin e URL.Kompajllimin me javac importKey.java
+si dhe run me ane te 3 argumenteve me kete metode java ds import-key emri dhe pathi.
+Feedbacks ndihmese nga create user me eksplorimin ne xml file si dhe nga stackoverflow.
+
 
