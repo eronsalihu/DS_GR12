@@ -58,3 +58,11 @@ ne pathin perkates dhe bejme debug javac createUser.java
 Pastaj e bejme run me dhenien e argumenteve perkatese java ds create-user dhe emrin se si deshirojm ta ruajme e cila pranon
 vetem shkronja te alfabetit anglez numra dhe "_".
 Feedbacks nga geeksforgeeks dhe stackoverflow
+
+Metoda Delete User
+Shikon nese filet me emrin perkates te dhene ekzistojne ai publik dhe privat dhe i fshine ato me file.delete()
+Kompajllimi me deleteUser.java kurse run me ane te argumenteve java ds delete-user emri.
+Feedbacks w3schools.
+
+
+
