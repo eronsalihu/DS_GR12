@@ -72,4 +72,10 @@ publik dhe ku duhet ruajtur.Gjithashtu nese eshte http https merr trupin e URL.K
 si dhe run me ane te 3 argumenteve me kete metode java ds import-key emri dhe pathi.
 Feedbacks ndihmese nga create user me eksplorimin ne xml file si dhe nga stackoverflow.
 
+--Write-Message--
+Ka te beje me enkriptimin e tekstit qe deshirojme me ane te Desit.Ku se pari ruajm emrin ne base64 pastaj edhe krijimin
+e 8 secure random bytes ne iv te koduara ne base64.Pastaj keyn e gjeneruar nga random 8 bytes te cilin e shendrrojme ne secure
+key e enkriptojme me qelesin publik nga argumenti i 2te ne cmd personit qe i takon dhe pastaj me keyn origjinal me des e enkriptojme
+fjaline qe deshirojme ne argumentin e 3te.Kompajllimi me java writeMessage.java berja run nga java ds write-message emri(ku marrim qelsin publik)
+teksti(qe deshirojme te enkriptojme) dhe nje argument opsional [file] nese nuk deshirojm ta shfaqim ne konzole por ta ruajm ne file.
 
