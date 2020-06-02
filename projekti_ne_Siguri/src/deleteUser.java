@@ -10,30 +10,33 @@ public class deleteUser {
         File file=new File("keys/", outFile + ".xml");
         File file1=new File("keys/",outFile+".pub.xml");
 
-            try {
-                if (file.exists() && file1.exists()) {
-                    file.delete();
-                    file1.delete();
-                    System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".xml'");
-                    System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".pub.xml'");
+        try {
+            if (file.exists() && file1.exists()) {
+                file.delete();
+                file1.delete();
+                System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".xml'");
+                System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".pub.xml'");
+                lidhjameDB.fshi(outFile);
 
 
-                }
-                else if  (file.exists() && !file1.exists()){
-                    file.delete();
-                    System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".xml'");
-                }
-                else if  (!file.exists() && file1.exists()){
-                    file1.delete();
-                    System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".pub.xml'");
-                }
-                else {
-                    System.out.println("Gabim:Celesi '"+outFile+"' nuk ekziston");
-                }
+            }
+            else if  (file.exists() && !file1.exists()){
+                file.delete();
+                System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".xml'");
+                lidhjameDB.fshi(outFile);
+            }
+            else if  (!file.exists() && file1.exists()){
+                file1.delete();
+                System.out.println("Eshte larguar celesi privat 'keys/" + outFile + ".pub.xml'");
+                lidhjameDB.fshi(outFile);
+            }
+            else {
+                System.out.println("Gabim:Celesi '"+outFile+"' nuk ekziston");
+            }
 
 
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
