@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 
 
 public class importKey {
-   
+
     public static void import_Key(String outFile, String path) throws ParserConfigurationException, IOException, SAXException, InvalidPathException {
         try {
             if (path.matches("^(http|https|)://.*$")) {
@@ -35,7 +35,7 @@ public class importKey {
                     HttpClient client = HttpClient.newHttpClient();
                     HttpRequest request = HttpRequest.newBuilder().uri(URI.create(path)).build();
                     HttpResponse < String > response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                    // System.out.println(response.body());
+
 
                     DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
@@ -102,8 +102,8 @@ public class importKey {
                                     System.out.println("Celesi publik u ruajt ne fajllin 'keys/" + outFile + ".pub.xml'.");
                                 }
                             } else if (a == 17 && mod == 1 && exp == 1 && p == 1 && q == 1 && dp == 1 && dq == 1 && inv == 1 && d == 1) {
-                                File freshFile = new File("src/keys/" + outFile + ".pub.xml");
-                                File privFile = new File("src/keys/" + outFile + ".xml");
+                                File freshFile = new File("keys/" + outFile + ".pub.xml");
+                                File privFile = new File("keys/" + outFile + ".xml");
                                 if (privFile.exists()) {
                                     System.out.println("Celesi '" + outFile + "' ekziston paraprakisht");
                                 }
