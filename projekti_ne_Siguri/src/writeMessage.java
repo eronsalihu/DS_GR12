@@ -1,7 +1,7 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
+import java.sql.*;
 import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
@@ -52,7 +52,7 @@ public class writeMessage {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("DES");
 
             SecretKey celesi = secretKeyFactory.generateSecret(myKeySpec);
-           
+
 
             //Fitimi i qelesit publik nga XML dokumenti
             String moduliS = ((org.w3c.dom.Document) doc).getElementsByTagName("Modulus").item(0).getTextContent();
