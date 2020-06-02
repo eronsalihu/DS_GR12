@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,9 +18,6 @@ import org.w3c.dom.Document;
 
 public class exportKey {
 
-    public static void main(String[] args) throws IOException {
-       
-    }
     private static Document XMLFileToXMLDocument(File filePath){
 
 
@@ -90,12 +88,12 @@ public class exportKey {
             else{
                 if (xml.exists()) {
 
-                Document xmlfile = XMLFileToXMLDocument(xml);
-                printExportKey(xmlfile);
+                    Document xmlfile = XMLFileToXMLDocument(xml);
+                    printExportKey(xmlfile);
 
-            } else {
-                System.out.println("Gabim: Celesi privat " + fileName + " nuk ekziston.");
-            }
+                } else {
+                    System.out.println("Gabim: Celesi privat " + fileName + " nuk ekziston.");
+                }
             }
 
         } catch (Exception e) {
