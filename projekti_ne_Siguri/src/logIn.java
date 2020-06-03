@@ -23,31 +23,15 @@ public class logIn {
         System.out.println("Token: " + sign(name));
         verify(sign(name), name);
 
-        File tokens=new File("/tokens/"+name+".txt");
+        File tokens=new File("tokens/"+name+".txt");
         FileOutputStream fileOutputStream=new FileOutputStream(new File(String.valueOf(tokens)));
         byte [] bytes=sign(name).getBytes();
         fileOutputStream.write(bytes);
 
-        /*long currentTimeMillis = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date resultdate = new Date(currentTimeMillis);
-        //System.out.println(sdf.format(resultdate));
-
-        long minutesPassed = System.currentTimeMillis() - ( 20 * 60 * 1000);
-        if (currentTimeMillis<minutesPassed){
-            //System.out.println("Token is invalid!");
-        }
-        else {
-            //System.out.println("Token is valid!");
-        }*/
-
     }
-
-
-
     public static String sign(String name) throws Exception {
 
-        File file=new File("/keys/"+name+".xml");
+        File file=new File("keys/"+name+".xml");
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -55,29 +39,34 @@ public class logIn {
         doc.getDocumentElement().normalize();
 
         String moduliS = doc.getElementsByTagName("Modulus").item(0).getTextContent();
-        String exponentAsString = doc.getElementsByTagName("D").item(0).getTextContent();
+        String D = doc.getElementsByTagName("D").item(0).getTextContent();
 
         BigInteger modulus = new BigInteger(Base64.getDecoder().decode(moduliS));
-        BigInteger exponent = new BigInteger(Base64.getDecoder().decode(exponentAsString));
+        BigInteger d = new BigInteger(Base64.getDecoder().decode(D));
 
 
-        RSAPrivateKeySpec keySpec = new RSAPrivateKeySpec(modulus, exponent);
+        RSAPrivateKeySpec keySpec = new RSAPrivateKeySpec(modulus, d);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
 
+        long currentTimeMillis = System.currentTimeMillis()+ ( 20 * 60 * 1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date resultdate = new Date(currentTimeMillis);
+        String string=sdf.format(resultdate);
+
+
         Signature privateSignature = Signature.getInstance("SHA1withRSA");
         privateSignature.initSign(privateKey);
-        privateSignature.update(name.getBytes(UTF_8));
+        privateSignature.update((name+string).getBytes(UTF_8));
 
         byte[] signature = privateSignature.sign();
 
         return Base64.getEncoder().encodeToString(signature);
-
     }
 
     public static boolean verify(String signature, String name) throws Exception {
 
-        File file=new File("/keys/"+name+".pub.xml");
+        File file=new File("keys/"+name+".pub.xml");
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -94,14 +83,18 @@ public class logIn {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
 
+        long currentTimeMillis = System.currentTimeMillis()+ ( 20 * 60 * 1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date resultdate = new Date(currentTimeMillis);
+        String string=sdf.format(resultdate);
+
+
         Signature publicSignature = Signature.getInstance("SHA1withRSA");
         publicSignature.initVerify(publicKey);
-        publicSignature.update(name.getBytes(UTF_8));
+        publicSignature.update((name+string).getBytes(UTF_8));
 
         byte[] signatureBytes = Base64.getDecoder().decode(signature);
 
         return publicSignature.verify(signatureBytes);
-
     }
-      
 }
