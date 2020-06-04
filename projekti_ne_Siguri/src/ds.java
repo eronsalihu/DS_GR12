@@ -1,12 +1,11 @@
 import org.xml.sax.SAXException;
 
-import java.io.Console;
-import java.sql.*;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
-import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ds  {
@@ -36,6 +35,10 @@ public class ds  {
                 char [] passi=console.readPassword("Jepni Fjalekalimin: ");
                 String password= String.valueOf(passi);
                 if (password.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
+                    if (password.length()<6){
+                        System.out.println("Passwordi duhet te jete me i gjate se 6 karaktere");
+                    }
+                    else{
                     char [] verifikimi=console.readPassword("Perserit Fjalekalimin");
                     String verify = String.valueOf(verifikimi);
                     if (password.equals(verify)) {
@@ -43,9 +46,11 @@ public class ds  {
                       //lidhjameDB.shto(b, password);
                     } else
                         System.out.println("Gabim: Fjalekalimet nuk perputhen");
-                } else
+                        System.exit(1);
+                }} else
                     {
                         System.out.println("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+                        System.exit(1);
                     }
             } else {
                 System.out.println("Argumenti i dyte mund te permbaje vetem shkronja numra ose underscore");
@@ -62,16 +67,24 @@ public class ds  {
         }else if (a.equalsIgnoreCase("login")){
             if (args.length != 2){
                 System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
             }
             else{
 
                 char [] passwordi=console.readPassword("Jepni fjalekalimin: ");
                 String password= String.valueOf(passwordi);
+                lidhjameDB.verifiko(b,password);
                 logIn.login(b);
             }
-        }
-
-        else if (a.equalsIgnoreCase("import-key")) {
+        }else if (a.equalsIgnoreCase("status")){
+            if (args.length!=2){
+                System.out.println("Argumentet nuk jane ne rregull");
+                System.exit(1);
+            }
+            else {
+                logIn.statusi(b);
+            }
+        } else if (a.equalsIgnoreCase("import-key")) {
             if (args.length != 3) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
@@ -121,6 +134,7 @@ public class ds  {
                         break;
                     } else {
                         System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
+                        System.exit(1);
 
                     }
                     break;
@@ -133,7 +147,7 @@ public class ds  {
                         break;
                     } else {
                         System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
-
+                        System.exit(1);
                     }
                     break;
                 case "playfair":
@@ -153,11 +167,13 @@ public class ds  {
                         break;
                     } else {
                         System.out.println("Duhet qe fjala e dyte te jete encrypt ose decrypt");
+                        System.exit(1);
                     }
                     break;
 
                 default:
                     System.out.println("Veprim i gabuar");
+                    System.exit(1);
             }
         } else {
             System.out.println("Metoda e zgjedhur e cipher codit eshte gabim");
