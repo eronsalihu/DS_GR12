@@ -1,27 +1,36 @@
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.math.BigInteger;
 import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.spec.InvalidKeySpecException;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class logIn {
-    public static void main(String[] args) throws InvalidKeySpecException, ParserConfigurationException, NoSuchAlgorithmException, SAXException, IOException {
-        login("enis");
+    public static void main(String[] args) throws Exception {
+      //  login("donika");
+
+       statusi("eydhbGcnOidSUzIwNDgnLCd0eXAnOidKV1QnfQ==.eyduYW1lJzonZG9uaWthJywnZXhwaXJhdGlvbl9kYXRlJzonMDQvMDYvMjAyMCAxNDozNSd9.BHg9LitRp2c+PTFS6xac5ees/5xA2iX09NnCtt0dvYZ1SgrJ3xpiOMBDnpkJqq918lsYtvnfw5LyI66UMxB9gkQhEkXD72KgInpGHJiojCLMbYbcllVJFwg14HRKytlTq4BpG3vZR6jhhbBiaCp56EdqeQUCf9vN9evlmrjNeNmsgiNzHXYuc95hnht2q+1IzIGQaLSg4/ldFkdz9Z0utn3hAQxgFSKaUQI9oG+vyBfxuu282Uox2FP5ySBAi815PWOswwUlYdxxjYk8tU+4NSaBrMTOiTjv3boEPzMCYa25P0hObirgRSUrlh+mMash3z+Z/mu05O1CXIb3j1Esvg==");
     }
     public static void login(String name) throws Exception {
 
         System.out.println("Token: " + sign(name));
-        verify(sign(name), name);
+        boolean a=verify(sign(name));
+       if (a)
+            System.out.println("Mir");
 
         File tokens=new File("tokens/"+name+".txt");
         FileOutputStream fileOutputStream=new FileOutputStream(new File(String.valueOf(tokens)));
@@ -53,18 +62,40 @@ public class logIn {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date resultdate = new Date(currentTimeMillis);
         String string=sdf.format(resultdate);
+        String algoritmi="{'alg':'RS2048'," +
+                "'typ':'JWT'" +
+                "}";
+        String tedhenat="{'name':'"+name+"'," +
+                "'expiration_date':'"+string+"'}";
+        String algoritmi_b64=Base64.getEncoder().encodeToString(algoritmi.getBytes());
+        String tedhenat_b64=Base64.getEncoder().encodeToString(tedhenat.getBytes());
+
+
 
 
         Signature privateSignature = Signature.getInstance("SHA1withRSA");
         privateSignature.initSign(privateKey);
-        privateSignature.update((name+string).getBytes(UTF_8));
+        privateSignature.update((tedhenat).getBytes(UTF_8));
 
         byte[] signature = privateSignature.sign();
 
-        return Base64.getEncoder().encodeToString(signature);
+        String signi= Base64.getEncoder().encodeToString(signature);
+        String komplet=algoritmi_b64+"."+tedhenat_b64+"."+signi;
+        return komplet;
+
+
     }
 
-    public static boolean verify(String signature, String name) throws Exception {
+    public static boolean verify(String signature) throws Exception {
+        String[] stringss = signature.split("\\.");
+        ArrayList<String> aListNumberss = new ArrayList<String>(Arrays.asList(stringss));
+        byte[] tedhenat = Base64.getDecoder().decode(aListNumberss.get(1));
+        String data=new String(tedhenat);
+        String nenshkrimi=signature.split("\\.")[2];
+
+        String name=data.split("'")[3];
+
+
 
         File file=new File("keys/"+name+".pub.xml");
 
@@ -83,18 +114,44 @@ public class logIn {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
 
-        long currentTimeMillis = System.currentTimeMillis()+ ( 20 * 60 * 1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date resultdate = new Date(currentTimeMillis);
-        String string=sdf.format(resultdate);
-
 
         Signature publicSignature = Signature.getInstance("SHA1withRSA");
         publicSignature.initVerify(publicKey);
-        publicSignature.update((name+string).getBytes(UTF_8));
+        publicSignature.update((data).getBytes(UTF_8));
 
-        byte[] signatureBytes = Base64.getDecoder().decode(signature);
+        byte[] signatureBytes = Base64.getDecoder().decode(nenshkrimi);
 
         return publicSignature.verify(signatureBytes);
     }
+    public static void statusi(String signature) throws Exception {
+        boolean nenshkrim_valid=verify(signature);
+        if (nenshkrim_valid){
+            String[] stringss = signature.split("\\.");
+            ArrayList<String> aListNumberss = new ArrayList<String>(Arrays.asList(stringss));
+            byte[] tedhenat = Base64.getDecoder().decode(aListNumberss.get(1));
+            String data=new String(tedhenat);
+            String name=data.split("'")[3];
+            String dataSkadimit=data.split("'")[7];
+            long currentTimeMillis = System.currentTimeMillis();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date resultdate = new Date(currentTimeMillis);
+            String string=sdf.format(resultdate);
+
+
+            int compareTO=string.compareTo(dataSkadimit);
+            if (compareTO<0)
+            {
+                lidhjameDB.gjeje(name);
+                System.out.println("Valid: Po");
+                System.out.println("Skadimi: "+dataSkadimit);
+
+            }
+            else System.out.println("Jo Valid");
+
+
+
+        }
+        else System.out.println("Jo Valid");
+    }
+
 }
