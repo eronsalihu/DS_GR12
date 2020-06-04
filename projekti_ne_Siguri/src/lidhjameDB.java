@@ -6,12 +6,12 @@ import java.sql.*;
 
 public class lidhjameDB {
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        //shto("Ani","Berisha");
-        //fshi("Ani");
-        verifiko("Ani","Berisha");
-
-    }
+//    public static void main(String[] args) throws Exception {
+//        // shto("donika","Berisha");
+//        //fshi("Ani");
+//        // verifiko("Ani","Berisha");
+//        gjeje("donika");
+//    }
 
 
         public static void shto(String a,String b){
@@ -29,8 +29,7 @@ public class lidhjameDB {
 
                 String sql="Insert into users (username,password)"+ "VALUES ('"+a+"','"+hashi+"')";
                 PreparedStatement stmt = con.prepareStatement(sql);
-                // stmt.setString(1, a);
-                // stmt.setString(2, b);
+
                 stmt.executeUpdate(sql);
                 System.out.println("Eshte krijuar shfrytezuesi "+a);}
                 else
@@ -62,8 +61,37 @@ public class lidhjameDB {
             }
 
         }
+        public static void gjeje(String username) throws Exception {
 
-    public static void verifiko(String a,String b) throws NoSuchAlgorithmException {
+            int count = 0;
+            int numri = 0;
+            String url = "jdbc:mysql://localhost:3306/ds_12";
+            String name = "root";
+            String password = "E.berisha1";
+
+            try {
+                Connection con = DriverManager.getConnection(url, name, password);
+                String checkusername = "Select * from users where username='"+username+"'";
+                Statement statement = con.createStatement();
+                ResultSet resultSet1 = statement.executeQuery(checkusername);
+                if (resultSet1.next() == false) {
+                    System.out.println("Useri nuk ekziston");
+                } else {
+
+                    System.out.println("User: "+username);
+                  }
+                }
+
+
+
+
+             catch (SQLException err) {
+                System.out.println(err.getMessage());
+            }
+
+        }
+
+    public static void verifiko(String a,String b) throws Exception {
         String pwHash=toHexString(getSHA(b));
         String url="jdbc:mysql://localhost:3306/ds_12";
         String name="root";
@@ -78,8 +106,8 @@ public class lidhjameDB {
             }
             else
             {
-              //  logIn.login(a);
-                System.out.println("a");
+                logIn.login(a);
+               // System.out.println("a");
             }
         }
         catch (SQLException err){
