@@ -8,10 +8,10 @@ import java.nio.file.InvalidPathException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class ds  {
+public class ds {
 
-    public static void main(String[] args) throws Exception, ParserConfigurationException, IOException, SAXException, InvalidPathException, FileNotFoundException,SQLException {
-        Scanner input=new Scanner(System.in);
+    public static void main(String[] args) throws Exception, ParserConfigurationException, IOException, SAXException, InvalidPathException, FileNotFoundException, SQLException {
+        Scanner input = new Scanner(System.in);
         Console console = System.console();
         if (args.length == 0) {
             System.out.println("There were no commandline arguments passed!");
@@ -32,26 +32,25 @@ public class ds  {
                 System.exit(1);
             } else if (b.matches("[A-Za-z0-9_]+")) {
 
-                char [] passi=console.readPassword("Jepni Fjalekalimin: ");
-                String password= String.valueOf(passi);
+                char[] passi = console.readPassword("Jepni Fjalekalimin: ");
+                String password = String.valueOf(passi);
                 if (password.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
-                    if (password.length()<6){
+                    if (password.length() < 6) {
                         System.out.println("Passwordi duhet te jete me i gjate se 6 karaktere");
-                    }
-                    else{
-                    char [] verifikimi=console.readPassword("Perserit Fjalekalimin");
-                    String verify = String.valueOf(verifikimi);
-                    if (password.equals(verify)) {
-                        createUser.generate_key(b,password);
-                      //lidhjameDB.shto(b, password);
-                    } else
-                        System.out.println("Gabim: Fjalekalimet nuk perputhen");
-                        System.exit(1);
-                }} else
-                    {
-                        System.out.println("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+                    } else {
+                        char[] verifikimi = console.readPassword("Perserit Fjalekalimin");
+                        String verify = String.valueOf(verifikimi);
+                        if (password.equals(verify)) {
+                            createUser.generate_key(b, password);
+                            //lidhjameDB.shto(b, password);
+                        } else
+                            System.out.println("Gabim: Fjalekalimet nuk perputhen");
                         System.exit(1);
                     }
+                } else {
+                    System.out.println("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+                    System.exit(1);
+                }
             } else {
                 System.out.println("Argumenti i dyte mund te permbaje vetem shkronja numra ose underscore");
                 System.exit(1);
@@ -62,26 +61,25 @@ public class ds  {
             if (args.length != 2) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            } else {deleteUser.delete(b);
+            } else {
+                deleteUser.delete(b);
             }
-        }else if (a.equalsIgnoreCase("login")){
-            if (args.length != 2){
+        } else if (a.equalsIgnoreCase("login")) {
+            if (args.length != 2) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            }
-            else{
+            } else {
 
-                char [] passwordi=console.readPassword("Jepni fjalekalimin: ");
-                String password= String.valueOf(passwordi);
-                lidhjameDB.verifiko(b,password);
+                char[] passwordi = console.readPassword("Jepni fjalekalimin: ");
+                String password = String.valueOf(passwordi);
+                lidhjameDB.verifiko(b, password);
                 logIn.login(b);
             }
-        }else if (a.equalsIgnoreCase("status")){
-            if (args.length!=2){
+        } else if (a.equalsIgnoreCase("status")) {
+            if (args.length != 2) {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
-            }
-            else {
+            } else {
                 logIn.statusi(b);
             }
         } else if (a.equalsIgnoreCase("import-key")) {
@@ -107,7 +105,10 @@ public class ds  {
             if (args.length == 3) {
                 writeMessage.write_Message(b, args[2]);
             } else if (args.length == 4) {
-                writeMessage.write_Message(b, args[2], args[3]);
+                if (args[3].length() > 20) {
+                    writeMessage.write_messageSender(b, args[2], args[3]);
+                } else
+                    writeMessage.write_Message(b, args[2], args[3]);
             } else {
                 System.out.println("Argumentet nuk jane ne rregull");
                 System.exit(1);
