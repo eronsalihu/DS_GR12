@@ -6,13 +6,6 @@ import java.sql.*;
 
 public class lidhjameDB {
 
-//    public static void main(String[] args) throws Exception {
-//        // shto("donika","Berisha");
-//        //fshi("Ani");
-//        // verifiko("Ani","Berisha");
-//        gjeje("donika");
-//    }
-
 
         public static void shto(String a,String b){
             String algorithm="SHA-256";
