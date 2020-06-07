@@ -79,3 +79,12 @@ key e enkriptojme me qelesin publik nga argumenti i 2te ne cmd personit qe i tak
 fjaline qe deshirojme ne argumentin e 3te.Kompajllimi me java writeMessage.java berja run nga java ds write-message emri(ku marrim qelsin publik)
 teksti(qe deshirojme te enkriptojme) dhe nje argument opsional [file] nese nuk deshirojm ta shfaqim ne konzole por ta ruajm ne file.
 
+Source:
+https://stackoverflow.com/questions/38939056/jjwt-generated-token-has-an-invalid-signature
+https://dzone.com/articles/add-secure-token-authentication-to-your-java-app
+https://developer.okta.com/blog/2018/10/31/jwts-with-java
+https://github.com/jwtk/jjwt
+https://jwt.io/ ---- logjika e marre per ndertimin e tokenit
+
+
+
